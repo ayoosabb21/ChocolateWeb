@@ -1,0 +1,49 @@
+<html lang="en-US" ng-app="TIYAngularApp">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="/js/tiy-ng-controller.js"></script>
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/static.css" rel="stylesheet" type="text/css"/>
+</head>
+<body ng-controller="CocoaAppController">
+
+{{! changing the mustache delimiter so it doesn't conflict with  }}
+{{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info  }}
+{{=<% %>=}}
+
+<img src="http://vignette4.wikia.nocookie.net/disneycreate/images/7/75/Chocolate-o.gif/revision/latest?cb=20130721163057.gif" alt="HTML5 Icon" style="width: 428px; height: 228px; border-left-width: 250px; border-left-style: solid; border-right-width: 250px; border-right-style: solid; padding-right: 25px; padding-left: 25px; border-top-width: 25px; border-top-style: solid; margin-top: 25px;">
+
+<form action ="/login" method="post" style="border-left-style: solid; border-left-width: 0px; padding-top: 20px; padding-left: 270px;" action="/addChocolateInput.json" method="post">
+    <input style="padding-left: 0.5px; padding-right: 0.5px;" placeholder="How many smalls ?" ng-model="ChocolateInput.smalls" type="text">
+
+    <input style="padding-left: 0.5px; padding-right: 0.5px;" placeholder="How many bigs ?" ng-model="ChocolateInput.bigs" type="text">
+
+    <input style="padding-right: 0.5px; padding-left: 0.5px;" placeholder="What is the goal ?" ng-model="ChocolateInput.goal" type="text">
+
+</form>
+<button style="padding-right: 10px; border-width: 20px; border-style: solid; margin-left: 450px; margin-right: 450px;" ng-click="makeChocolate()">Make</button>
+<button ng-click="testFunction()">Make</button>
+
+
+<div ng-if="chocolate.hasSolution">
+    <p>Smalls used for this solution: {{chocolate.smalls}}</p>
+    <p>Bigs used for this solution: {{chocolate.bigs}}</p>
+
+
+    <div ng-repeat="chocIndex in makeArray(chocolate.bigs)">
+        <div class="choc-big-bar">{{chocIndex + 1}}</div>
+    </div>
+
+    <div ng-repeat="chocIndex in makeArray(chocolate.smalls)">
+        <div class="choc-small-bar">{{chocIndex + 1}}</div>
+    </div>
+
+</div>
+
+<div ng-if="!chocolate.hasSolution">
+    <p>Not possible to make chocolate ...</p>
+</div>
+
+</body>
+
+</html>
